@@ -2,4 +2,9 @@
 <tv>
   <channel id="Telefe"><display-name>Telefe</display-name></channel>
   <channel id="ElTrece"><display-name>El Trece</display-name></channel>
+  <channel id="AmericaTV"><display-name>América TV</display-name></channel>
+  <channel id="LasEstrellas"><display-name>Las Estrellas</display-name></channel>
+  <channel id="Caracol"><display-name>Caracol TV</display-name></channel>
+  <channel id="RCN"><display-name>RCN</display-name></channel>
+  <channel id="Latina"><display-name>Latina</display-name></channel>
 </tv>
