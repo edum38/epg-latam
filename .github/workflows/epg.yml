@@ -11,32 +11,113 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout repositorio
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       
       - name: Configurar git
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
       
-      - name: Crear EPG
+      - name: Crear EPG completo
         run: |
-          echo '<?xml version="1.0" encoding="UTF-8"?>' > epg_latam.xml
-          echo '<tv>' >> epg_latam.xml
-          echo '  <channel id="Telefe"><display-name>Telefe</display-name></channel>' >> epg_latam.xml
-          echo '  <channel id="ElTrece"><display-name>El Trece</display-name></channel>' >> epg_latam.xml
-          echo '  <channel id="AmericaTV"><display-name>América TV</display-name></channel>' >> epg_latam.xml
-          echo '  <channel id="LasEstrellas"><display-name>Las Estrellas</display-name></channel>' >> epg_latam.xml
-          echo '  <channel id="Caracol"><display-name>Caracol TV</display-name></channel>' >> epg_latam.xml
-          echo '  <channel id="RCN"><display-name>RCN</display-name></channel>' >> epg_latam.xml
-          echo '  <channel id="Latina"><display-name>Latina</display-name></channel>' >> epg_latam.xml
-          echo '</tv>' >> epg_latam.xml
-          
-          echo "✅ EPG creado"
-          cat epg_latam.xml
+          cat > epg_latam.xml << 'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<tv generator-info-name="EPG-LATAM">
+
+  <!-- ===== ARGENTINA (15 canales) ===== -->
+  <channel id="Telefe.ar"><display-name>Telefe</display-name></channel>
+  <channel id="ElTrece.ar"><display-name>El Trece</display-name></channel>
+  <channel id="AmericaTV.ar"><display-name>América TV</display-name></channel>
+  <channel id="TVPublica.ar"><display-name>TV Pública</display-name></channel>
+  <channel id="TN.ar"><display-name>Todo Noticias</display-name></channel>
+  <channel id="C5N.ar"><display-name>C5N</display-name></channel>
+  <channel id="Cronica.ar"><display-name>Crónica TV</display-name></channel>
+  <channel id="TyC.ar"><display-name>TyC Sports</display-name></channel>
+  <channel id="ESPN.ar"><display-name>ESPN Argentina</display-name></channel>
+  <channel id="NetTV.ar"><display-name>Net TV</display-name></channel>
+  <channel id="Bravo.ar"><display-name>Bravo TV</display-name></channel>
+  <channel id="Canal9.ar"><display-name>Canal 9</display-name></channel>
+  <channel id="A24.ar"><display-name>A24</display-name></channel>
+  <channel id="LaNacion.ar"><display-name>La Nación +</display-name></channel>
+  <channel id="IP.ar"><display-name>IP Noticias</display-name></channel>
+
+  <!-- ===== MÉXICO (12 canales) ===== -->
+  <channel id="LasEstrellas.mx"><display-name>Las Estrellas</display-name></channel>
+  <channel id="Azteca7.mx"><display-name>Azteca 7</display-name></channel>
+  <channel id="AztecaTrece.mx"><display-name>Azteca Trece</display-name></channel>
+  <channel id="Canal5.mx"><display-name>Canal 5</display-name></channel>
+  <channel id="ImagenTV.mx"><display-name>Imagen TV</display-name></channel>
+  <channel id="ADN40.mx"><display-name>ADN 40</display-name></channel>
+  <channel id="OnceTV.mx"><display-name>Once TV</display-name></channel>
+  <channel id="Multimedios.mx"><display-name>Multimedios</display-name></channel>
+  <channel id="TUDN.mx"><display-name>TUDN</display-name></channel>
+  <channel id="ForoTV.mx"><display-name>Foro TV</display-name></channel>
+  <channel id="Milenio.mx"><display-name>Milenio TV</display-name></channel>
+  <channel id="Excelsior.mx"><display-name>Excélsior TV</display-name></channel>
+
+  <!-- ===== COLOMBIA (10 canales) ===== -->
+  <channel id="Caracol.co"><display-name>Caracol TV</display-name></channel>
+  <channel id="RCN.co"><display-name>RCN Televisión</display-name></channel>
+  <channel id="Canal1.co"><display-name>Canal 1</display-name></channel>
+  <channel id="SenalColombia.co"><display-name>Señal Colombia</display-name></channel>
+  <channel id="Teleantioquia.co"><display-name>Teleantioquia</display-name></channel>
+  <channel id="Telecaribe.co"><display-name>Telecaribe</display-name></channel>
+  <channel id="Telepacifico.co"><display-name>Telepacífico</display-name></channel>
+  <channel id="CanalTrece.co"><display-name>Canal Trece</display-name></channel>
+  <channel id="CityTV.co"><display-name>CityTV</display-name></channel>
+  <channel id="WinSports.co"><display-name>Win Sports</display-name></channel>
+
+  <!-- ===== PERÚ NACIONAL (15 canales) ===== -->
+  <channel id="AmericaTV.pe"><display-name>América Televisión</display-name></channel>
+  <channel id="Latina.pe"><display-name>Latina</display-name></channel>
+  <channel id="Panamericana.pe"><display-name>Panamericana</display-name></channel>
+  <channel id="ATV.pe"><display-name>ATV</display-name></channel>
+  <channel id="TVPeru.pe"><display-name>TV Perú</display-name></channel>
+  <channel id="GlobalTV.pe"><display-name>Global TV</display-name></channel>
+  <channel id="Willax.pe"><display-name>Willax TV</display-name></channel>
+  <channel id="Exitosa.pe"><display-name>Exitosa TV</display-name></channel>
+  <channel id="Liga1Max.pe"><display-name>Liga 1 Max</display-name></channel>
+  <channel id="GolPeru.pe"><display-name>Gol Perú</display-name></channel>
+  <channel id="MovistarDeportes.pe"><display-name>Movistar Deportes</display-name></channel>
+  <channel id="RPP.pe"><display-name>RPP TV</display-name></channel>
+  <channel id="CanalN.pe"><display-name>Canal N</display-name></channel>
+  <channel id="ATVPlus.pe"><display-name>ATV+</display-name></channel>
+  <channel id="TVPeruNoticias.pe"><display-name>TV Perú Noticias</display-name></channel>
+
+  <!-- ===== PERÚ REGIONES (20 canales) ===== -->
+  <channel id="UniversalTV.arequipa"><display-name>Universal TV Arequipa</display-name></channel>
+  <channel id="VisionSur.arequipa"><display-name>Visión Sur</display-name></channel>
+  <channel id="QuatroTV.arequipa"><display-name>Quatro Televisión</display-name></channel>
+  <channel id="BethelTV.arequipa"><display-name>Bethel TV Arequipa</display-name></channel>
+  <channel id="CuscoTV.cusco"><display-name>Cusco TV</display-name></channel>
+  <channel id="IncaTV.cusco"><display-name>Inca TV</display-name></channel>
+  <channel id="MachuPicchuTV.cusco"><display-name>Machu Picchu TV</display-name></channel>
+  <channel id="TrujilloTV.trujillo"><display-name>Trujillo TV</display-name></channel>
+  <channel id="NorteTV.trujillo"><display-name>Norte TV</display-name></channel>
+  <channel id="ChiclayoTV.chiclayo"><display-name>Chiclayo TV</display-name></channel>
+  <channel id="KaribenaTV.chiclayo"><display-name>Karibeña TV</display-name></channel>
+  <channel id="PiuraTV.piura"><display-name>Piura TV</display-name></channel>
+  <channel id="UNPTV.piura"><display-name>UNP TV</display-name></channel>
+  <channel id="PunoTV.puno"><display-name>Puno TV</display-name></channel>
+  <channel id="JuliacaTV.puno"><display-name>Juliaca TV</display-name></channel>
+  <channel id="IquitosTV.iquitos"><display-name>Iquitos TV</display-name></channel>
+  <channel id="AmazonicaTV.iquitos"><display-name>Amazónica TV</display-name></channel>
+  <channel id="HuancayoTV.huancayo"><display-name>Huancayo TV</display-name></channel>
+  <channel id="TacnaTV.tacna"><display-name>Tacna TV</display-name></channel>
+  <channel id="PucallpaTV.pucallpa"><display-name>Pucallpa TV</display-name></channel>
+  <channel id="CajamarcaTV.cajamarca"><display-name>Cajamarca TV</display-name></channel>
+  <channel id="TarapotoTV.tarapoto"><display-name>Tarapoto TV</display-name></channel>
+  <channel id="TumbesTV.tumbes"><display-name>Tumbes TV</display-name></channel>
+</tv>
+EOF
+
+          echo "✅ EPG generado con $(grep -c '<channel' epg_latam.xml) canales"
       
-      - name: Subir archivo
+      - name: Comprimir EPG
+        run: gzip -9 -c epg_latam.xml > epg_latam.xml.gz
+      
+      - name: Subir cambios
         run: |
-          git add epg_latam.xml
+          git add epg_latam.xml epg_latam.xml.gz
           git commit -m "EPG actualizado $(date +'%Y-%m-%d')" || echo "No hay cambios"
           git push
