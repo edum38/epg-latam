@@ -11,106 +11,56 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Configurar git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
       
       - name: Crear EPG completo
         run: |
           cat > epg_latam.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <tv>
-  <!-- ARGENTINA (15 canales) -->
+  <!-- ARGENTINA -->
   <channel id="Telefe"><display-name>Telefe</display-name></channel>
   <channel id="ElTrece"><display-name>El Trece</display-name></channel>
   <channel id="AmericaTV"><display-name>América TV</display-name></channel>
   <channel id="TVPublica"><display-name>TV Pública</display-name></channel>
   <channel id="TN"><display-name>Todo Noticias</display-name></channel>
-  <channel id="C5N"><display-name>C5N</display-name></channel>
-  <channel id="Cronica"><display-name>Crónica TV</display-name></channel>
   <channel id="TyC"><display-name>TyC Sports</display-name></channel>
-  <channel id="ESPN"><display-name>ESPN Argentina</display-name></channel>
-  <channel id="NetTV"><display-name>Net TV</display-name></channel>
-  <channel id="Bravo"><display-name>Bravo TV</display-name></channel>
-  <channel id="Canal9"><display-name>Canal 9</display-name></channel>
-  <channel id="A24"><display-name>A24</display-name></channel>
-  <channel id="LaNacion"><display-name>La Nación +</display-name></channel>
-  <channel id="IP"><display-name>IP Noticias</display-name></channel>
-
-  <!-- MÉXICO (12 canales) -->
+  
+  <!-- MÉXICO -->
   <channel id="LasEstrellas"><display-name>Las Estrellas</display-name></channel>
   <channel id="Azteca7"><display-name>Azteca 7</display-name></channel>
-  <channel id="AztecaTrece"><display-name>Azteca Trece</display-name></channel>
   <channel id="Canal5"><display-name>Canal 5</display-name></channel>
   <channel id="ImagenTV"><display-name>Imagen TV</display-name></channel>
-  <channel id="ADN40"><display-name>ADN 40</display-name></channel>
-  <channel id="OnceTV"><display-name>Once TV</display-name></channel>
-  <channel id="Multimedios"><display-name>Multimedios</display-name></channel>
-  <channel id="TUDN"><display-name>TUDN</display-name></channel>
-  <channel id="ForoTV"><display-name>Foro TV</display-name></channel>
-  <channel id="Milenio"><display-name>Milenio TV</display-name></channel>
-  <channel id="Excelsior"><display-name>Excélsior TV</display-name></channel>
-
-  <!-- COLOMBIA (10 canales) -->
+  
+  <!-- COLOMBIA -->
   <channel id="Caracol"><display-name>Caracol TV</display-name></channel>
-  <channel id="RCN"><display-name>RCN Televisión</display-name></channel>
-  <channel id="Canal1"><display-name>Canal 1</display-name></channel>
-  <channel id="SenalColombia"><display-name>Señal Colombia</display-name></channel>
-  <channel id="Teleantioquia"><display-name>Teleantioquia</display-name></channel>
-  <channel id="Telecaribe"><display-name>Telecaribe</display-name></channel>
-  <channel id="Telepacifico"><display-name>Telepacífico</display-name></channel>
-  <channel id="CanalTrece"><display-name>Canal Trece</display-name></channel>
-  <channel id="CityTV"><display-name>CityTV</display-name></channel>
+  <channel id="RCN"><display-name>RCN</display-name></channel>
   <channel id="WinSports"><display-name>Win Sports</display-name></channel>
-
-  <!-- PERÚ NACIONAL (15 canales) -->
+  
+  <!-- PERÚ -->
   <channel id="AmericaTVPeru"><display-name>América Televisión</display-name></channel>
   <channel id="Latina"><display-name>Latina</display-name></channel>
-  <channel id="Panamericana"><display-name>Panamericana</display-name></channel>
   <channel id="ATV"><display-name>ATV</display-name></channel>
   <channel id="TVPeru"><display-name>TV Perú</display-name></channel>
-  <channel id="GlobalTV"><display-name>Global TV</display-name></channel>
-  <channel id="Willax"><display-name>Willax TV</display-name></channel>
-  <channel id="Exitosa"><display-name>Exitosa TV</display-name></channel>
-  <channel id="Liga1Max"><display-name>Liga 1 Max</display-name></channel>
-  <channel id="GolPeru"><display-name>Gol Perú</display-name></channel>
-  <channel id="MovistarDeportes"><display-name>Movistar Deportes</display-name></channel>
   <channel id="RPP"><display-name>RPP TV</display-name></channel>
-  <channel id="CanalN"><display-name>Canal N</display-name></channel>
-  <channel id="ATVPlus"><display-name>ATV+</display-name></channel>
-  <channel id="TVPeruNoticias"><display-name>TV Perú Noticias</display-name></channel>
-
-  <!-- PERÚ REGIONES (20 canales) -->
-  <channel id="UniversalTV"><display-name>Universal TV Arequipa</display-name></channel>
-  <channel id="VisionSur"><display-name>Visión Sur</display-name></channel>
-  <channel id="QuatroTV"><display-name>Quatro Televisión</display-name></channel>
-  <channel id="CuscoTV"><display-name>Cusco TV</display-name></channel>
-  <channel id="IncaTV"><display-name>Inca TV</display-name></channel>
-  <channel id="MachuPicchuTV"><display-name>Machu Picchu TV</display-name></channel>
-  <channel id="TrujilloTV"><display-name>Trujillo TV</display-name></channel>
-  <channel id="NorteTV"><display-name>Norte TV</display-name></channel>
-  <channel id="ChiclayoTV"><display-name>Chiclayo TV</display-name></channel>
-  <channel id="KaribenaTV"><display-name>Karibeña TV</display-name></channel>
-  <channel id="PiuraTV"><display-name>Piura TV</display-name></channel>
-  <channel id="UNPTV"><display-name>UNP TV</display-name></channel>
-  <channel id="PunoTV"><display-name>Puno TV</display-name></channel>
-  <channel id="JuliacaTV"><display-name>Juliaca TV</display-name></channel>
-  <channel id="IquitosTV"><display-name>Iquitos TV</display-name></channel>
-  <channel id="AmazonicaTV"><display-name>Amazónica TV</display-name></channel>
-  <channel id="HuancayoTV"><display-name>Huancayo TV</display-name></channel>
-  <channel id="TacnaTV"><display-name>Tacna TV</display-name></channel>
-  <channel id="PucallpaTV"><display-name>Pucallpa TV</display-name></channel>
-  <channel id="CajamarcaTV"><display-name>Cajamarca TV</display-name></channel>
 </tv>
 EOF
-
-          echo "✅ EPG generado con $(grep -c '<channel' epg_latam.xml) canales"
+          echo "✅ EPG creado con $(grep -c '<channel' epg_latam.xml) canales"
       
-      - name: Comprimir
+      - name: Comprimir EPG
         run: gzip -9 -c epg_latam.xml > epg_latam.xml.gz
       
       - name: Subir cambios
         run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
           git add epg_latam.xml epg_latam.xml.gz
-          git commit -m "EPG actualizado $(date +'%Y-%m-%d')" || true
+          git commit -m "EPG actualizado $(date +'%Y-%m-%d')" || exit 0
           git push
