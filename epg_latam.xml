@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tv>
+  <channel id="Telefe"><display-name>Telefe</display-name></channel>
+  <channel id="ElTrece"><display-name>El Trece</display-name></channel>
+</tv>
