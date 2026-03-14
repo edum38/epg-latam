@@ -1,0 +1,44 @@
+name: EPG Latinoamérica
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Crear EPG
+        run: |
+          cat > epg_latam.xml << 'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<tv>
+  <channel id="Telefe"><display-name>Telefe</display-name></channel>
+  <channel id="ElTrece"><display-name>El Trece</display-name></channel>
+  <channel id="AmericaTV"><display-name>América TV</display-name></channel>
+  <channel id="LasEstrellas"><display-name>Las Estrellas</display-name></channel>
+  <channel id="Caracol"><display-name>Caracol TV</display-name></channel>
+  <channel id="RCN"><display-name>RCN</display-name></channel>
+  <channel id="Latina"><display-name>Latina</display-name></channel>
+</tv>
+EOF
+          echo "✅ EPG creado"
+      
+      - name: Subir archivo
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add epg_latam.xml
+          git commit -m "EPG actualizado" || true
+          git push
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
